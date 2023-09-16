@@ -8,10 +8,7 @@ output: github_document
 
 # Problem 1
 
-```{r}
-#install.packages("moderndive")
-#
-#
+```{r, echo=FALSE, message=FALSE}
 # loading dataset
 #
 #
@@ -23,7 +20,8 @@ data("early_january_weather")
 The dataset `early_january_weather` consists of `r nrow(early_january_weather)` rows and `r ncol(early_january_weather)` variables. This dataset includes various essential variables measured at EWR weather station from January 1st to January 15th in 2013: `temp` and `dewp` for temperature and dew point, `humid` for the relative humidity, `wind_dir`, `wind_speed`, `wind_gust` for wind direction, speed and gust speed, respectively. Additionally, `precip`, `pressure`, and `visib` represent precipitation, sea level pressure, and visibility. The mean temperature in Fahrenheit is `r mean(early_january_weather$temp)`.
 
 
-```{r}
+```{r, echo=FALSE}
+# scatter plot temp vs. date 
 ggplot(early_january_weather) + 
   geom_point(aes(x = time_hour, y = temp, color = humid))
 #ggsave("scatterplot_weather.pdf")
@@ -35,10 +33,34 @@ The scatter plot shows a weak positive correlation between temperature and date 
 # Problem 2
 
 
+```{r, echo=FALSE, warning=FALSE}
+mydata <- tibble(
+  vec_num = rnorm(10),
+  vec_logical = vec_num > 0,
+  vec_char = rep("A", 10),
+  vec_factor = factor(c("low", "low", "low", "medium", "medium", "medium", 
+                        "high", "high", "high", "high"))
+)
+
+# mean
+mean_num <- mean(pull(mydata, vec_num))
+mean_logical <- mean(pull(mydata, vec_logical))
+mean_char <- mean(pull(mydata, vec_char))
+mean_facor <- mean(pull(mydata, vec_factor))
+```
+
+When taking mean values for the 4 variables, the numerical and logical vectors returned numerical results, while the character vector and the factor vector returned NA.
 
 
 
 
+```{r, include=FALSE}
+as.numeric(pull(mydata, vec_logical))
+as.numeric(pull(mydata, vec_char))
+as.numeric(pull(mydata, vec_factor))
+```
+
+The logical and factor vectors can be converted to numerical values while the character vector cannot, which implies they are stored in R as some numerical values. This explains why we can take the mean value of the logical vector directly. The factor vector is initially represented as character values in the dataset, making it unsuitable for direct mean calculation, but after applying `as.numeric` to it, we can successfully transform it into numerical values, enabling subsequent mean calculations.
 
 
 
