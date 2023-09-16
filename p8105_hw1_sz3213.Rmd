@@ -2,9 +2,10 @@
 title: "p8105_hw1_sz3213"
 author: "Sitian Zhou"
 date: "2023-09-16"
-output: html_document
+output: github_document
 ---
 
+some text
 
 
 
