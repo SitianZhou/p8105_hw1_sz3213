@@ -22,9 +22,12 @@ The dataset `early_january_weather` consists of `r nrow(early_january_weather)` 
 # scatter plot temp vs. date 
 ggplot(early_january_weather) + 
   geom_point(aes(x = time_hour, y = temp, color = humid))
+```
 
+
+```{r, echo=FALSE, message=FALSE}
 # save the plot
-#ggsave("scatterplot_weather.pdf")
+ggsave("scatterplot_weather.pdf")
 ```
 
 According to the scatter plot, the temperature from January 1st to January 15th is generally showing an upward trend. Additonally, the daily temperature fluctuation tends to be smaller when humidity is close to 100 (Jan 13th - Jan 14th) compared to the rest of the day when humidity is around 50.
@@ -43,7 +46,7 @@ mydata <- tibble(
                         "high", "high", "high", "high"))
 )
 
-# calcuate the mean
+# calculate the mean
 mean_num <- mean(pull(mydata, vec_num))
 mean_logical <- mean(pull(mydata, vec_logical))
 mean_char <- mean(pull(mydata, vec_char))
@@ -55,14 +58,14 @@ When taking mean values for the 4 variables, the numerical and logical vectors r
 
 
 
-```{r, include=FALSE}
+```{r, eval=FALSE}
 # convert the logical, character, and factor variables to numerical values
 as.numeric(pull(mydata, vec_logical))
 as.numeric(pull(mydata, vec_char))
 as.numeric(pull(mydata, vec_factor))
 ```
 
-The logical and factor vectors can be converted to numerical values while the character vector cannot, which implies they are stored in R as some numerical values. This explains why we can take the mean value of the logical vector directly. The factor vector is initially represented as character values in the dataset, making it unsuitable for direct mean calculation, but after applying `as.numeric` to it, we can successfully transform it into numerical values, enabling subsequent mean calculations.
+The logical and factor vectors can be converted to numerical values using the code above while the character vector cannot, which implies they are stored in R as some numerical values. This explains why we can take the mean value of the logical vector directly. The factor vector is initially represented as character values in the dataset, making it unsuitable for direct mean calculation, but after applying `as.numeric` to it, we can successfully transform it into numerical values, enabling subsequent mean calculations.
 
 
 
