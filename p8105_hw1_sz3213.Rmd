@@ -10,8 +10,6 @@ output: github_document
 
 ```{r, echo=FALSE, message=FALSE}
 # loading dataset
-#
-#
 library(moderndive)
 library(tidyverse)
 data("early_january_weather")
@@ -24,25 +22,28 @@ The dataset `early_january_weather` consists of `r nrow(early_january_weather)` 
 # scatter plot temp vs. date 
 ggplot(early_january_weather) + 
   geom_point(aes(x = time_hour, y = temp, color = humid))
+
+# save the plot
 #ggsave("scatterplot_weather.pdf")
 ```
 
-The scatter plot shows a weak positive correlation between temperature and date in January. The daily temperature fluctuation tends to be smaller when humidity is high (Jan 13-Jan 14) compared to the rest of the day when humidity is around 50.
+According to the scatter plot, the temperature from January 1st to January 15th is generally showing an upward trend. Additonally, the daily temperature fluctuation tends to be smaller when humidity is close to 100 (Jan 13th - Jan 14th) compared to the rest of the day when humidity is around 50.
 
 
 # Problem 2
 
 
 ```{r, echo=FALSE, warning=FALSE}
+# create a data frame
 mydata <- tibble(
   vec_num = rnorm(10),
   vec_logical = vec_num > 0,
-  vec_char = rep("A", 10),
+  vec_char = c('a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'z'),
   vec_factor = factor(c("low", "low", "low", "medium", "medium", "medium", 
                         "high", "high", "high", "high"))
 )
 
-# mean
+# calcuate the mean
 mean_num <- mean(pull(mydata, vec_num))
 mean_logical <- mean(pull(mydata, vec_logical))
 mean_char <- mean(pull(mydata, vec_char))
@@ -55,6 +56,7 @@ When taking mean values for the 4 variables, the numerical and logical vectors r
 
 
 ```{r, include=FALSE}
+# convert the logical, character, and factor variables to numerical values
 as.numeric(pull(mydata, vec_logical))
 as.numeric(pull(mydata, vec_char))
 as.numeric(pull(mydata, vec_factor))
