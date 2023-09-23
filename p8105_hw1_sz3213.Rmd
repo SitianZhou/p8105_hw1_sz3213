@@ -8,7 +8,7 @@ output: github_document
 
 # Problem 1
 
-```{r, echo=FALSE, message=FALSE}
+```{r, message=FALSE}
 # loading dataset
 library(moderndive)
 library(tidyverse)
@@ -18,25 +18,27 @@ data("early_january_weather")
 The dataset `early_january_weather` consists of `r nrow(early_january_weather)` rows and `r ncol(early_january_weather)` variables. This dataset includes various essential variables measured at EWR weather station from January 1st to January 15th in 2013: `temp` and `dewp` for temperature and dew point, `humid` for the relative humidity, `wind_dir`, `wind_speed`, `wind_gust` for wind direction, speed and gust speed, respectively. Additionally, `precip`, `pressure`, and `visib` represent precipitation, sea level pressure, and visibility. The mean temperature in Fahrenheit is `r mean(early_january_weather$temp)`.
 
 
-```{r, echo=FALSE}
+```{r}
 # scatter plot temp vs. date 
 ggplot(early_january_weather) + 
-  geom_point(aes(x = time_hour, y = temp, color = humid))
+  geom_point(aes(x = time_hour, 
+                 y = temp, 
+                 color = humid))
 ```
 
 
-```{r, echo=FALSE, message=FALSE}
+```{r, message=FALSE}
 # save the plot
 ggsave("scatterplot_weather.pdf")
 ```
 
-According to the scatter plot, the temperature from January 1st to January 15th is generally showing an upward trend. Additonally, the daily temperature fluctuation tends to be smaller when humidity is close to 100 (Jan 13th - Jan 14th) compared to the rest of the day when humidity is around 50.
+According to the scatter plot, the temperature from January 1st to January 15th is generally showing an upward trend. Additionally, the daily temperature fluctuation tends to be smaller when humidity is close to 100 (Jan 13th - Jan 14th) compared to the rest of the day when humidity is around 50.
 
 
 # Problem 2
 
 
-```{r, echo=FALSE, warning=FALSE}
+```{r, warning=FALSE, comment=NA}
 # create a data frame
 mydata <- tibble(
   vec_num = rnorm(10),
@@ -45,15 +47,17 @@ mydata <- tibble(
   vec_factor = factor(c("low", "low", "low", "medium", "medium", "medium", 
                         "high", "high", "high", "high"))
 )
-
 # calculate the mean
 mean_num <- mean(pull(mydata, vec_num))
 mean_logical <- mean(pull(mydata, vec_logical))
 mean_char <- mean(pull(mydata, vec_char))
-mean_facor <- mean(pull(mydata, vec_factor))
+mean_factor <- mean(pull(mydata, vec_factor))
 ```
 
-When taking mean values for the 4 variables, the numerical and logical vectors returned numerical results, while the character vector and the factor vector returned NA.
+
+
+
+When taking mean values for the four variables, the numerical and logical vectors returned numerical results, while the character vector and the factor vector returned NA.
 
 
 
